@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sorting basics | Weihan Kong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Here is a quick review of basic sorting algorithms, including quick sort, merge sort, heap sort and count sort.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sorting basics">
+<meta property="og:url" content="http://whk.me/sorting-basics/">
+<meta property="og:site_name" content="Weihan Kong">
+<meta property="og:description" content="Here is a quick review of basic sorting algorithms, including quick sort, merge sort, heap sort and count sort.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sorting basics">
+<meta name="twitter:description" content="Here is a quick review of basic sorting algorithms, including quick sort, merge sort, heap sort and count sort.">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Weihan Kong" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Weihan Kong</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://whk.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-sorting-basics" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/sorting-basics/" class="article-date">
+  <time datetime="2014-10-26T04:09:53.000Z" itemprop="datePublished">Oct 25 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sorting basics
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Here is a quick review of basic sorting algorithms, including quick sort, merge sort, heap sort and count sort.</p>
+<a id="more"></a>
+
+<h2 id="Quick_Sort">Quick Sort</h2>
+<p>Quicksort divides the array into three parts: one pivot element in the middle, all elements that are less than the pivot on the left side, and all elements that are bigger than the pivot on the right side. If there are duplicate elements in the array, either the left or the right part can be equal to the pivot. The array is then semi-sorted and the left and right parts then can be sorted recursively.</p>
+<p><code>void quicksort(int[] A, int left, int right)</code></p>
+<p>To partition and semi-sort the array, use the <code>right</code> element as pivot, use a <code>wall</code> pointer to indicate the position of partition(where the pivot should go), and use a <code>cur</code> pointer to traverse all elements except for the pivot.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="operator"><span class="keyword">start</span>:</span></div><div class="line"> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</div><div class="line">|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|</div><div class="line"> ^                     ^</div><div class="line"> wall = <span class="keyword">left</span>           <span class="keyword">right</span>(pivot)</div><div class="line"> ^</div><div class="line"> cur = <span class="keyword">left</span></div><div class="line"> </div><div class="line"> </div><div class="line"><span class="keyword">stop</span>:</div><div class="line"> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</div><div class="line">|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|</div><div class="line">  smaller &lt;- ^ -&gt; bigger       ^</div><div class="line">             wall              <span class="keyword">right</span>(pivot)</div><div class="line">                               ^</div><div class="line">                               cur == <span class="keyword">right</span></div></pre></td></tr></table></figure>
+
+<p>All elements that are left to the <code>wall</code> position should be smaller than (or equal to) the pivot, so traverse through the array using <code>cur</code> pointer, if the element is smaller than (or equal to) the pivot, swap it with the <code>wall</code> element, and then <code>wall++</code>.</p>
+<p>In the end <code>cur</code> meets <code>right</code>(the pivot), swap <code>wall</code> and <code>right</code>.</p>
+<p>Recursively sort the two parts</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">quicksort(A, <span class="keyword">left</span>, <span class="keyword">wall</span> - <span class="number">1</span>);</div><div class="line">quicksort(A, <span class="keyword">wall</span> + <span class="number">1</span>, <span class="keyword">right</span>);</div></pre></td></tr></table></figure>
+
+<p>For base case, if there is only 1 element, when <code>left==right</code>, there is no need to sort. When there are 2 elements, the procedure above works fine. It swaps the elements if the first is bigger than the second and leave it alone if they are already in order. Notice that in this case, <code>wall + 1 = 2</code> and <code>right = 1</code>, the next recursive call have <code>left &gt; right</code>, so the base case should include this case (and do nothing), too.</p>
+<h3 id="Stability">Stability</h3>
+<p>Not stable here. But stable variants exists.</p>
+<h3 id="Complexity">Complexity</h3>
+<p>If the array is partitioned in half at every recursive level, the time complexity is <code>O(nlgn)</code> because at each level we have <code>O(n)</code> elements to compare and swap and there are <code>O(lgn)</code> recursive levels. Space complexity is <code>O(lgn)</code> for the recursive calls’ stack.</p>
+<p>In the worst case, the array is already sorted or reversely sorted. Then the partition is always extremely unbalanced and we get <code>O(n^2)</code> time complexity and <code>O(n)</code> space complexity</p>
+<p>To optimize the partition position, we can pick a random element as the pivot and swap it with the <code>right</code> element and proceed. On average we have <code>O(nlgn)</code> time and <code>O(lgn)</code> space complexity.</p>
+<h2 id="Merge_Sort">Merge Sort</h2>
+<p>Mergesort divides the array in the middle, recursively sort the two parts, then <em>merge</em> them into one sorted array.</p>
+<p><code>void mergesort(int[] A, int left, int right)</code></p>
+<p>To divide the array, set <code>mid = (left + right) / 2</code>. If there are odd number of elements, <code>mid</code> will be the middle element; If there are even number of elements, <code>mid</code> will be the left one of the two elements in the middle.</p>
+<p>Recursively sort the two parts first</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mergesort(A, <span class="built_in">left</span>, <span class="built_in">mid</span>);</div><div class="line">mergesort(A, <span class="built_in">mid</span> + <span class="number">1</span>, <span class="built_in">right</span>);</div></pre></td></tr></table></figure>
+
+<p><code>mid</code> element has to be in the left part because otherwise we may have infinite recursive calls: if there are two elements, <code>mid</code> <em>will be</em> the <code>left</code> element and if we call <code>mergesort(A, mid, right)</code> it is trying to sort these two elements again recursively.</p>
+<p>To merge the two sorted arrays, use an auxiliary array <code>int B[]</code> of the size <code>right-left+1</code> and two pointers to indicate the <em>current</em> first element of the two sorted arrays. Iterate through array <code>B</code>, for each position, fill it up with the smaller one of the <em>current</em> first element of the two sorted arrays and increase that array’s pointer by 1. If any pointer is pointing to the end of the array, the <em>current</em> first element of the other array should be selected.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">B</div><div class="line"> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</div><div class="line">|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|</div><div class="line">                     ^</div><div class="line">                     k, position <span class="built_in">to</span> fill</div><div class="line"> </div><div class="line"> </div><div class="line">A</div><div class="line"> _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</div><div class="line">|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|</div><div class="line"> ^       ^                     ^             ^                 ^</div><div class="line"> left    i                     <span class="keyword">mid</span>           j                 <span class="constant">right</span></div><div class="line"></div><div class="line">Choose <span class="operator">the</span> smaller <span class="constant">one</span> <span class="operator">of</span> A[i] <span class="operator">and</span> A[j] <span class="built_in">to</span> fill up B[k]</div></pre></td></tr></table></figure>
+
+<p>Finally, copy the sorted elements in <code>B</code> back to <code>A</code>.</p>
+<h3 id="Stability-1">Stability</h3>
+<p>Stable, if merge properly: in case <code>A[i] == A[j]</code>, choose <code>A[i]</code>.</p>
+<h3 id="Complexity-1">Complexity</h3>
+<p>The array is partitioned into two equal-size parts, so there are <code>O(lgn)</code> levels of recursive calls. At each level <code>O(n)</code> elements need to be merged and copied. The time complexity is always <code>O(nlgn)</code>.</p>
+<p>The auxiliary array and recursive calls’ stack take <code>O(n+n/2)=O(n)</code> extra space, in any case.</p>
+<h2 id="Heap_Sort">Heap Sort</h2>
+<p>Heapsort is glorified selection sort by selecting the max element at every iteration more efficiently. Heapsort builds a max-heap with the input array where the first element of the heap is always the max element. After removing this max element from the heap, keeping the structure as a max-heap and finding the next max-element can be done very quickly.</p>
+<p>A max-heap is built by seeing the array as having a full complete binary tree structure.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">          <span class="number">0</span></div><div class="line">    <span class="number">1</span>           <span class="number">2</span></div><div class="line">  <span class="number">3</span>    <span class="number">4</span>     <span class="number">5</span>     <span class="number">6</span></div><div class="line"><span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span> .  .   .   <span class="keyword">binary</span> tree <span class="keyword">structure</span> view <span class="keyword">for</span> <span class="number">12</span>-element array</div></pre></td></tr></table></figure>
+
+<p>Given the indexing of this strucutre, we can easily find <code>parent</code>, <code>left</code> child and <code>right</code> child of any node.</p>
+<h3 id="Max-heap">Max-heap</h3>
+<p>A full complete binary tree is a max-heap if</p>
+<ol>
+<li>the root is bigger than the left and right child</li>
+<li>the left and right subtrees are themselves max-heap.</li>
+</ol>
+<h3 id="Heapfity_a_tree">Heapfity a tree</h3>
+<p>Assume the left and right subtrees are both max-heap. To keep this tree a max-heap, check whether the root is bigger than both the left and right child. If yes, then the tree is already a max-heap; if not, swap the root with the biggest child and recursively heapify that subtree. This process will pass a small element from root down to where it should be.</p>
+<h3 id="Build_max-heap">Build max-heap</h3>
+<p>To build a max-heap, heapifying all the subtrees from bottom up. In the example above, start by heapifying the subtree rooted at <code>5</code>. Then <code>4,3,2...</code> up till <code>0</code>. At each step, we know the left and right subtrees are already max-heap because they have been heapified.</p>
+<h3 id="Sort">Sort</h3>
+<p>Now we can iterate through the array backwards. At each iteration, swap the first and last element of the heap, decrease the size of the heap by 1(no harm to the heap) and heapify the heap again.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">An example heap</div><div class="line"></div><div class="line">           <span class="number">11</span> &lt;<span class="comment">-----------  swap with 2</span></div><div class="line">     <span class="number">10</span>          <span class="number">9</span>       |  <span class="number">11</span> would be <span class="operator">in</span> <span class="operator">the</span> <span class="constant">right</span> place</div><div class="line">   <span class="number">8</span>    <span class="number">4</span>     <span class="number">5</span>     <span class="number">1</span>    |  heapify <span class="operator">the</span> <span class="keyword">whole</span> heap <span class="built_in">to</span> <span class="built_in">put</span> <span class="number">2</span> <span class="operator">in</span> <span class="operator">the</span> <span class="constant">right</span> place</div><div class="line"> <span class="number">7</span>  <span class="number">6</span>  <span class="number">0</span> <span class="number">3</span>  <span class="number">2</span> &lt;<span class="comment">-----------  and 10 is the next max element</span></div></pre></td></tr></table></figure>
+
+<h3 id="Stability-2">Stability</h3>
+<p>Not stable.</p>
+<h3 id="Complexity-2">Complexity</h3>
+<p><code>Heapify</code> takes <code>O(lgn)</code> time at worst because the binary tree has such height. To build the max-heap, <code>O(n)</code> heapification is done, one for each node. However, it only takes <code>O(n)</code> time overall because the bottom subtrees have much smaller height and they are the majority of the <code>O(n)</code> heapifications.</p>
+<p>Keeping the max-heap needs <code>O(lgn)</code> time because of the height of the tree and we iterate through all elements so the time complexity is <code>O(nlgn+n) = O(nlgn)</code>. The heap-building process time is ignored asymptotically, but when the array is not huge this is a considerable overhead.</p>
+<p>The max-heap is built on the array itself so the space complexity is <code>O(1)</code>.</p>
+<h2 id="Count_Sort">Count Sort</h2>
+<p>Countsort is mostly suitable for sorting integers within a given range, especially when there are a lot of duplicates in the array. The idea is to compute the position that each element should be put in by counting the number of elements of each value and accumulating the counts.</p>
+<p><code>void countsort(int[] A, int lower, int upper)</code> where the input elements are assumed to be in range [lower,upper]. The range is <code>K = upper - lower + 1</code></p>
+<p>Suppose we are sorting 5 students by their height, which is in range [150,200] cm. We use the instant random-access property of memory to count the number of elements of each value(in this case no duplicates) and accumulate the count <code>C[i] = C[i] + C[i-1]</code> to get the position.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">heights of students:</div><div class="line"><span class="number">170</span> <span class="number">165</span> <span class="number">180</span> <span class="number">175</span> <span class="number">173</span></div><div class="line"></div><div class="line">count array:</div><div class="line">height:   <span class="number">150</span> <span class="number">151</span> <span class="number">152</span> <span class="keyword">...</span> <span class="number">165</span> <span class="number">166</span> <span class="keyword">...</span> <span class="number">170</span> <span class="number">171</span> <span class="number">172</span> <span class="number">173</span> <span class="number">174</span> <span class="number">175</span> <span class="number">176</span> <span class="keyword">...</span> <span class="number">180</span> <span class="number">181</span> <span class="keyword">...</span> <span class="number">200</span></div><div class="line">index:      <span class="number">0</span>   <span class="number">1</span>   <span class="number">2</span> <span class="keyword">...</span>  <span class="number">15</span>  <span class="number">16</span> <span class="keyword">...</span>  <span class="number">20</span>  <span class="number">21</span>  <span class="number">22</span>  <span class="number">23</span>  <span class="number">24</span>  <span class="number">25</span>  <span class="number">26</span> <span class="keyword">...</span>  <span class="number">30</span>  <span class="number">31</span> <span class="keyword">...</span>  <span class="number">50</span></div><div class="line">count:      <span class="number">0</span>   <span class="number">0</span>   <span class="number">0</span> <span class="keyword">...</span>   <span class="number">1</span>   <span class="number">0</span> <span class="keyword">...</span>   <span class="number">1</span>   <span class="number">0</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">0</span> <span class="keyword">...</span>   <span class="number">1</span>   <span class="number">0</span> <span class="keyword">...</span>   <span class="number">0</span></div><div class="line">position:   <span class="number">0</span>   <span class="number">0</span>   <span class="number">0</span> <span class="keyword">...</span>   <span class="number">0</span>   <span class="number">1</span> <span class="keyword">...</span>   <span class="number">1</span>   <span class="number">2</span>   <span class="number">2</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">3</span>   <span class="number">4</span> <span class="keyword">...</span>   <span class="number">4</span>   <span class="number">5</span> <span class="keyword">...</span>   <span class="number">5</span></div><div class="line">sort:                       ^           ^           ^       ^           ^</div></pre></td></tr></table></figure>
+
+<p>Now we can iterate through every element again to get its position. Notice the position for value without corresponding element in the array will never be used in this step, they are only for accumulating the count and “passing” the position along, e.g. the “position” of 172 is also 2 but there is no 172 in the array so its “position” will not be used in this step.</p>
+<p>When there are duplicates in the array, the accumulating process will give us the position of the last element of this value. Then we can iterate through the array <em>backwards</em> to put every element in the right potision and decrease the corresponding position by 1 for the next element with the same value.</p>
+<h3 id="Stability-3">Stability</h3>
+<p>Countsort is stable, because we iterate backwards in the last step.</p>
+<h3 id="Complexity-3">Complexity</h3>
+<p>The counting process takes <code>O(n)</code> time. The accumulating process takes <code>O(K)</code> time. The final step takes <code>O(n)</code> time. So overall time complexity is <code>O(max(n,K)) = O(n+K)</code>.</p>
+<p>Space complexity is <code>O(K)</code> for the counting array.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://whk.me/sorting-basics/" data-id="h9tcj2r0sa96gevx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithms/">algorithms</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/heard-internship/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Heard internship
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithms/">algorithms</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recommendation-systems/">recommendation systems</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/binary-search-tree-basics/">Binary search tree basics</a>
+          </li>
+        
+          <li>
+            <a href="/heard-internship/">Heard internship</a>
+          </li>
+        
+          <li>
+            <a href="/sorting-basics/">Sorting basics</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 Weihan Kong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>

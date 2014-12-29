@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Binary search tree basics | Weihan Kong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binary search tree basics">
+<meta property="og:url" content="http://whk.me/binary-search-tree-basics/">
+<meta property="og:site_name" content="Weihan Kong">
+<meta property="og:description" content="A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Binary search tree basics">
+<meta name="twitter:description" content="A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees">
+
+  
+    <link rel="alternative" href="/atom.xml" title="Weihan Kong" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Weihan Kong</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://whk.me"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-binary-search-tree-basics" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/binary-search-tree-basics/" class="article-date">
+  <time datetime="2014-12-27T02:11:30.000Z" itemprop="datePublished">Dec 26 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Binary search tree basics
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees are themselves BST. All values should be unique in BST because they are usually used as keys to retrieve dictionary (or map) values.</p>
+<a id="more"></a>
+
+<h3 id="Recursive_tree_traversal">Recursive tree traversal</h3>
+<ol>
+<li>In-order traversal: recursively traverse the left sub-tree, then visit the root, then recursively traverse the right sub-tree.</li>
+<li>Pre-order traversal: the same with in-order traversal, but visit the root first.</li>
+<li>Post-order traversal: the same with in-order traversal, but visit the root last.</li>
+</ol>
+<h3 id="Binary_search">Binary search</h3>
+<p>Start with the root, if it is not the target, compare the target with the root and decide which sub-tree to go next. Go all the way down to the leaf of the tree and stop if the target is never found.</p>
+<h3 id="Insert">Insert</h3>
+<ol>
+<li>Find the place the value should be by searching the value in the tree and go all the way down to the bottom of the tree (<code>current_node == null</code>). If the value is found along the way, we probably shouldn’t insert it again. </li>
+<li>Make the new node and link it to its parent. To do this, remember to keep track of the parent of the <code>current_node</code> when we do the search in step 1.</li>
+</ol>
+<h3 id="Max/Min">Max/Min</h3>
+<p>To find the maximum value of a BST (or any sub-tree of it), start with the root, and go all the way to the right until there is no more right child. Similar procedure for finding minimum value.</p>
+<h3 id="Successor/Predecessor">Successor/Predecessor</h3>
+<p>To find the smallest node bigger than a given <code>node</code>, there are two cases:</p>
+<p>a. <code>node</code> has a right child: </p>
+<p>The successor is the minimum value of the sub-tree rooted at the right child, so call <code>min(node.right_child)</code> to find it.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">     node</div><div class="line">    /    \</div><div class="line">  <span class="keyword">...</span>   right</div><div class="line">       /     \</div><div class="line">     <span class="keyword">...</span>     <span class="keyword">...</span></div><div class="line">     /</div><div class="line">successor</div></pre></td></tr></table></figure>
+
+<p>b. <code>node</code> has no right child:</p>
+<p>The succesor is the parent of <code>node</code> if it is a left child of the parent. Otherwise, to one-level up and check whether the parent is a left child of the grand-parent, etc. Go all the way up to the top until we get a node who is a left child of its parent, and that parent is the successor of <code>node</code>. If we reach the root of the tree, <code>node</code> does not have a successor and it is the maximum node of the BST.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">                           successor</div><div class="line">                           /</div><div class="line">grand-grand-<span class="keyword">...</span>-grand parent</div><div class="line">                           \</div><div class="line">                           <span class="keyword">...</span></div><div class="line">                             \</div><div class="line">                             node</div><div class="line">                            /    \</div><div class="line">                          <span class="keyword">...</span>    null</div></pre></td></tr></table></figure>
+
+<p>Similar procedure for the predecessor.</p>
+<h3 id="Delete">Delete</h3>
+<p>a. <code>node</code> has no child:</p>
+<p>Just set the link from <code>node</code>‘s parent to <code>node</code> as <code>null</code> and delete the node.</p>
+<p>b. <code>node</code> has one child:</p>
+<p>Let’s say <code>node</code> has a left child but no right child. All we need is to link the left sub-tree of <code>node</code> with its parent and delete <code>node</code>.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">     |----------&gt; parent</div><div class="line">     |            /</div><div class="line">link |         node (deleted)</div><div class="line">     |        /    \</div><div class="line">     |---&gt; left    null</div><div class="line">           /  \</div><div class="line">         <span class="keyword">...</span>  <span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+<p>c. <code>node</code> has two children but the right child of <code>node</code> does not have left child:</p>
+<p>Put the right child in the place of <code>node</code> and delete <code>node</code>. And “old right child” become the parent of the left child.</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">           parent</div><div class="line">           /</div><div class="line">        node (deleted) &lt;--|</div><div class="line">      /      \            | move to here</div><div class="line">  left       right -------|</div><div class="line">  /  \       /   \</div><div class="line"><span class="keyword">...</span>  <span class="keyword">...</span>  null   <span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+<p>Or, we can do the similar thing to the left child if the right child does has a left child.</p>
+<p>d. <code>node</code> has two children and non of the above is valid:</p>
+<ol>
+<li>Find the successor of <code>node</code>, put it in the place of <code>node</code> and delete <code>node</code>.</li>
+<li>Put the successor’s right child <code>B</code> (if exists) in the place of the successor, and so now <code>B</code> is the left child of the seccesor’s parent <code>A</code>.</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">            parent</div><div class="line">          /</div><div class="line">       node (deleted) &lt;---|</div><div class="line">     /      \             |</div><div class="line">  left      right         |</div><div class="line">  /  \      /   \         |</div><div class="line"><span class="keyword">...</span>  <span class="keyword">...</span>  <span class="keyword">...</span>   <span class="keyword">...</span>       | move to here</div><div class="line">          /               |</div><div class="line">         A                |</div><div class="line">        /                 |</div><div class="line">   successor -------------|    &lt;--|</div><div class="line">   /       \                      | move to here</div><div class="line"> null       B --------------------|</div><div class="line">           / \</div><div class="line">         <span class="keyword">...</span> <span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://whk.me/binary-search-tree-basics/" data-id="p54x19jv3q26cuz9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithms/">algorithms</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/heard-internship/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Heard internship</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithms/">algorithms</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recommendation-systems/">recommendation systems</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/binary-search-tree-basics/">Binary search tree basics</a>
+          </li>
+        
+          <li>
+            <a href="/heard-internship/">Heard internship</a>
+          </li>
+        
+          <li>
+            <a href="/sorting-basics/">Sorting basics</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2014 Weihan Kong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+
+  </div>
+</body>
+</html>
