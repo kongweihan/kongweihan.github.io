@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Weihan Kong</title>
+  <title>Sorting basics | Weihan Kong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Weihan Kong">
-<meta property="og:url" content="http://whk.me/">
+  <meta name="description" content="Sorting
+Quick Sort
+Quicksort divides the array into three parts: one pivot element in the middle, all elements that are less than the pivot on the left side, and all elements that are bigger than the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sorting basics">
+<meta property="og:url" content="http://whk.me/basics/">
 <meta property="og:site_name" content="Weihan Kong">
-<meta property="og:description">
+<meta property="og:description" content="Sorting
+Quick Sort
+Quicksort divides the array into three parts: one pivot element in the middle, all elements that are less than the pivot on the left side, and all elements that are bigger than the">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Weihan Kong">
-<meta name="twitter:description">
+<meta name="twitter:title" content="Sorting basics">
+<meta name="twitter:description" content="Sorting
+Quick Sort
+Quicksort divides the array into three parts: one pivot element in the middle, all elements that are less than the pivot on the left side, and all elements that are bigger than the">
 
   
     <link rel="alternative" href="/atom.xml" title="Weihan Kong" type="application/atom+xml">
@@ -63,9 +69,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-basics" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-basics" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/basics/" class="article-date">
   <time datetime="2014-12-29T02:07:53.000Z" itemprop="datePublished">Dec 28 2014</time>
@@ -78,8 +82,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/basics/">Sorting basics</a>
+    <h1 class="article-title" itemprop="name">
+      Sorting basics
     </h1>
   
 
@@ -174,124 +178,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-heard-internship" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/heard-internship/" class="article-date">
-  <time datetime="2014-12-17T08:00:00.000Z" itemprop="datePublished">Dec 17 2014</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/heard-internship/">Heard internship</a>
-    </h1>
+    <a href="/heard-internship/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Heard internship</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Recently I’ve been doing an internship at <a href="http://goheard.com" target="_blank" rel="external">Heard</a> and here is a review of what I’ve accomplished.</p>
-<p>In short, <a href="http://goheard.com" target="_blank" rel="external">Heard</a> is a new social network where users get personalized content based on their interests and behavior without the need to follow or friend anyone.</p>
-<p>As an intern, I’m primarily building and testing the back-end scalable user clustering and post recommendation system, based on a multi-queue structure, using Java, MongoDB and Azure. I’m also partly responsible for maintaining REST API, user activity tracking system and post inboxing system.</p>
-<h2 id="Introduction">Introduction</h2>
-<p><a href="http://goheard.com" target="_blank" rel="external">Heard</a> looks a bit like Twitter except that users don’t need to friend or follow anyone. Instead, <a href="http://goheard.com" target="_blank" rel="external">Heard</a> will provide recommended content (posts) automatically, based on users’ behavior. As an intern, I’m building the first version of this recommendation system as well as maintaining related back-end services. Let me briefly describe how <a href="http://goheard.com" target="_blank" rel="external">Heard</a> works first.</p>
-<p>With <a href="http://goheard.com" target="_blank" rel="external">Heard</a>, users can view other people’s posts or create their own posts. Instead of retweeting posts like Twitter, <a href="http://goheard.com" target="_blank" rel="external">Heard</a> let users upvote or downvote posts to express their opinion of whether the post should be seen by more people. The system will show the highly voted content to more people automatically. Users don’t need to worry about not having followers, everyone’s voice is <em>heard</em>.</p>
-<p>More importantly, users’ voice is not only heard, but by people who have common interests. <a href="http://goheard.com" target="_blank" rel="external">Heard</a> clusters people into groups and the system will sort all the posts for each group by the posts’ <em>strength</em> in that group, which is computed based on users’ behavior such as upvoting, commenting, etc. Thus people in different groups will see different content accordingly.</p>
-<p>However, not having a follower system like Twitter doesn’t mean everyone is equally important. In Twitter, the number of followers indicates a user’s <em>overall</em> importance. In <a href="http://goheard.com" target="_blank" rel="external">Heard</a>, every user has different <em>reputation score</em> for each group, which will affect the initial <em>strength</em> of the user’s posts for that group.</p>
-<p><a href="http://goheard.com" target="_blank" rel="external">Heard</a> also has different channels at the top level that represent general topics that people may join. The groups clustered by algorithms are like sub-topics or certain characteristics that a group of people share.</p>
-<p>All these above may sound a bit convoluted, but fortunately (or maybe unfortunately) the concept of clustered groups are hidden from the user (for now). All the user needs to do is browsing and interacting and getting more and more customized content as time goes on.</p>
-<p>As a short review, in <a href="http://goheard.com" target="_blank" rel="external">Heard</a>:</p>
-<ol>
-<li>Any post belongs to every group, with a different <em>strength</em> for each group.</li>
-<li>Any user belongs to one group (for now), but have a <em>reputation score</em> for each group.</li>
-<li>The user’s <em>reputation score</em> for a group will determine his/her posts’ initial <em>strength</em> for that group.</li>
-</ol>
-<h2 id="Clustering_and_strength_computation">Clustering and strength computation</h2>
-<p>To build the first version of the recommendation system, I proposed an approach combining the idea of <em>matrix factorization</em> and clustering.</p>
-<p>We use a user-post utility matrix to represent the relationship between users and posts. The utility of a user-post pair is computed based on the user’s behavior on that post. The higher the utility, the more the user likes the post.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">user 	post 	A	B	C	D</div><div class="line">Tom		0.5 	.	2.0 	.</div><div class="line">Jerry		.	0.6 	0.1 	.</div><div class="line">Will 		.	.	.	5.0</div><div class="line">David 		1.0 	.	.	.</div></pre></td></tr></table></figure>
-
-<p>where <code>.</code> means the user doesn’t have any interaction with the post. The idea here is to estimate the <code>.</code>‘s based on existing data and recommend the posts with high estimated utility to the user. This is usually done by <em>matrix factorization</em>.</p>
-<p>Implicitly, we see this matrix as the product of two matrices: a user-group membership matrix</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">user 	group 	G1	G2	G3</div><div class="line">Tom		0 	1	0 </div><div class="line">Jerry		0	1 	0</div><div class="line">Will 		0	0	1</div><div class="line">David 		1 	0	0</div></pre></td></tr></table></figure>
-
-<p>and a group-post strength matrix</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">user 	post 	A	B	C	D</div><div class="line">G1		0.3 	1.0	0.2 	0.6</div><div class="line">G2		0.0	0.6 	0.1 	0.4</div><div class="line">G3 		0.7	0.9	0.5	0.2</div></pre></td></tr></table></figure>
-
-<p>The numbers are fake but are representative of the datatype of the 3 matrices. Again, a user can only belong to one group for now, so there is only one <code>1</code> in each row of the user-group membership matrix. But this can easily be extended to support multi-group membership.</p>
-<p>The process is as follows: </p>
-<ol>
-<li>We use the user-post utility matrix to cluster users into several groups, forming the user-group membership matrix. We’ve tried k-means, hierarchical and information-based clustering. However, these methods don’t make much difference so far.</li>
-<li>We compute each post’s strength by performing <em>non-negative least-squares</em> on existing data. For example, post <code>A</code> has data only for <code>Tom</code> and <code>David</code> in user-post utility matrix, so we’ll have the following least-squares problem:</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">0  1  0         ?         0.5</div><div class="line">1  0  0    x    ?    =    1.0</div><div class="line">                ?</div></pre></td></tr></table></figure>
-
-<p>The first matrix consists of rows of <code>Tom</code> and <code>David</code> in user-group membership matrix. The right-hand side vector comes from user-post utility matrix. The solved vector will represents the strength of post <code>A</code> for each group.</p>
-<p>We can thus constantly re-compute and update each post’s strength as the user-post utility matrix changes, and re-compute the user-group membership matrix once a while. The content users see will base on posts’ strength.</p>
-<h2 id="Back-end_services">Back-end services</h2>
-<h3 id="REST_API_and_activity_processor">REST API and activity processor</h3>
-<p>All apps uses REST API.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">       use        ios app        call           </div><div class="line">user  <--->     android app     <---->  REST API</----></---></div><div class="line">             windows phone app                  </div><div class="line">                  website</div></pre></td></tr></table></figure>
-
-<p>User activities information are sent to and cached in Azure queue by REST calls. A scalable service ActivityProcessor then records them into database. To make group specific recommendation, we re-designed database schema and I modified ActivityProcessor to follow the new design.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">        new activity          horizontally scale                     write</div><div class="line">REST API  <------>  Azure queue  <---------->  ActivityProcessor(s)  <--->  MongoDB</---></----------></------></div></pre></td></tr></table></figure>
-
-<p>Of course, REST API also talks to the database directly when the user is browsing. I modified REST API so that it knows user’s group information and retrieves corresponding contents from the database.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">          read</div><div class="line">REST API  <-->  MongoDB</--></div></pre></td></tr></table></figure>
-
-<h3 id="Clustering_service_(built_from_scratch)">Clustering service (built from scratch)</h3>
-<p>Having all the users’ activity information, we can do the clustering. A monitoring service <code>ClusterMonitor</code> periodically checks each channel whether it needs to be re-clustered because of significant changes in the structure of the population.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">                              add clustering task</div><div class="line">MongoDB  <-->  ClusterMonitor(s)  <--------->  Azure queue</---------></--></div></pre></td></tr></table></figure>
-
-<p>Then a scalable service <code>ClusterWorker</code> will do the actual clustering. Since we look forward to having many channels, there may be a lot of clustering tasks at the same time. Using a queue here makes the computation scalable.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">                             get clustering task</div><div class="line">MongoDB  <-->  ClusterWorker(s)  <--------->  Azure queue</---------></--></div></pre></td></tr></table></figure>
-
-<h3 id="Strengh_computation_service_(built_from_scratch)">Strengh computation service (built from scratch)</h3>
-<p>Posts’ <em>strength</em> and users’ <em>reputation score</em> are also checked once a while whether it needs to be re-computed. The checking period dynamically depends on the recent activity of the post. Similar to clustering, Azure queue is used to make the computation scalable.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">                              add computation task</div><div class="line">MongoDB  <-->  StrengthMonitor(s)  <---------->  Azure queue</----------></--></div></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">                             get computation task</div><div class="line">MongoDB  <-->  StrengthWorker(s)  <---------->  Azure queue</----------></--></div></pre></td></tr></table></figure>
-
-<h3 id="Post_inboxing_service">Post inboxing service</h3>
-<p>Having all posts’ <em>strength</em> computed, we can finally provide users recommended content! For each group, we generate a set of inboxes each consists of 100 posts, sorted according to rules like “newest first” and “highest score first”, etc. </p>
-<p>We stores these inboxes in MongoDB collections and the REST API will retrieve them for the user. I modified the service so that it generates different inboxes for different groups, thus making group-specific recommendation. So far we don’t have user-specific recommendation yet.</p>
-<p>Inbox collection naming format:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">channelId-groupId-inboxId</div></pre></td></tr></table></figure>
-
-<h2 id="What’s_next">What’s next</h2>
-<p>After Christmas holiday, I’ll continue the intern and explore more rigorous methods to test the new system and hopefully we’ll deploy it soon!</p>
-<p>I’d also like to thank <a href="https://www.linkedin.com/in/davevr" target="_blank" rel="external">David</a> for his mentoring. I’ve definitely learned a lot throughout this internship!</p>
-<h3 id="Wanna_know_more_about_Heard?">Wanna know more about Heard?</h3>
-<p><a href="https://twitter.com/heardteam" target="_blank" rel="external">Twitter</a><br><a href="http://onforb.es/1z3PM5c" target="_blank" rel="external">Forbes article</a><br><a href="http://trib.al/q2cepXt" target="_blank" rel="external">Daily Dot article</a><br><a href="http://mashable.com/2014/12/12/are-ad-networks-ruining-christmas/#:eyJzIjoidCIsImkiOiJfYnlzZm81d2p3Z2t6emJpaSJ9" target="_blank" rel="external">Mashable article</a><br><a href="http://trojanvision.usc.edu/ep-36-11102014-dave-vronay-with-cole-sullivan/" target="_blank" rel="external">USC interview</a><br><a href="http://www.businessnewsdaily.com/7463-new-social-networking-tools.html" target="_blank" rel="external">Business News Daily article</a><br><a href="http://dataconomy.com/leakers-and-whistleblowers-find-a-new-ally-in-heard/" target="_blank" rel="external">Dataconomy article</a><br><a href="http://motherboard.vice.com/read/theres-a-new-social-network-for-leakers-and-whistleblowers" target="_blank" rel="external">Motherboard article</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://whk.me/heard-internship/" data-id="lzhkhwzyrbq5jy2u" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/recommendation-systems/">recommendation systems</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-  
 </section>
         
           <aside id="sidebar">
