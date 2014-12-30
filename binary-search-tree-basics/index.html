@@ -5,21 +5,21 @@
   
   <title>Binary search tree basics | Weihan Kong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees">
+  <meta name="description" content="A review of basic operations of a binary search tree, including search, insert, max/min, successor/predecessor and delete.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Binary search tree basics">
 <meta property="og:url" content="http://whk.me/binary-search-tree-basics/">
 <meta property="og:site_name" content="Weihan Kong">
-<meta property="og:description" content="A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees">
+<meta property="og:description" content="A review of basic operations of a binary search tree, including search, insert, max/min, successor/predecessor and delete.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Binary search tree basics">
-<meta name="twitter:description" content="A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees">
+<meta name="twitter:description" content="A review of basic operations of a binary search tree, including search, insert, max/min, successor/predecessor and delete.">
 
   
     <link rel="alternative" href="/atom.xml" title="Weihan Kong" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico">
   
   <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="/css/style.css" type="text/css">
@@ -85,45 +85,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees are themselves BST. All values should be unique in BST because they are usually used as keys to retrieve dictionary (or map) values.</p>
+        <h2>Contents</h2><ul class="toc" style="list-style:none"><li class="toc-item toc-level-2"><a class="toc-link" href="#BST_definition"><span class="toc-number">1.</span> <span class="toc-text">BST definition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Binary_search"><span class="toc-number">2.</span> <span class="toc-text">Binary search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Insert"><span class="toc-number">3.</span> <span class="toc-text">Insert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Max/Min"><span class="toc-number">4.</span> <span class="toc-text">Max/Min</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Successor/Predecessor"><span class="toc-number">5.</span> <span class="toc-text">Successor/Predecessor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Delete"><span class="toc-number">6.</span> <span class="toc-text">Delete</span></a></li></ul>
+        <p>A review of basic operations of a binary search tree, including search, insert, max/min, successor/predecessor and delete.</p>
 <a id="more"></a>
 
-<h3 id="Recursive_tree_traversal">Recursive tree traversal</h3>
-<ol>
-<li>In-order traversal: recursively traverse the left sub-tree, then visit the root, then recursively traverse the right sub-tree.</li>
-<li>Pre-order traversal: the same with in-order traversal, but visit the root first.</li>
-<li>Post-order traversal: the same with in-order traversal, but visit the root last.</li>
-</ol>
-<h3 id="Binary_search">Binary search</h3>
+<h2 id="BST_definition">BST definition</h2>
+<p>A binary search tree (BST) is a tree where all elements in the left sub-tree (if any) are less than the root and all elements in the right sub-tree (if any) are bigger than the root, and the sub-trees are themselves BST. All values should be unique in BST because they are usually used as keys to retrieve dictionary (or map) values.</p>
+<h2 id="Binary_search">Binary search</h2>
 <p>Start with the root, if it is not the target, compare the target with the root and decide which sub-tree to go next. Go all the way down to the leaf of the tree and stop if the target is never found.</p>
-<h3 id="Insert">Insert</h3>
+<h2 id="Insert">Insert</h2>
 <ol>
 <li>Find the place the value should be by searching the value in the tree and go all the way down to the bottom of the tree (<code>current_node == null</code>). If the value is found along the way, we probably shouldn’t insert it again. </li>
 <li>Make the new node and link it to its parent. To do this, remember to keep track of the parent of the <code>current_node</code> when we do the search in step 1.</li>
 </ol>
-<h3 id="Max/Min">Max/Min</h3>
+<h2 id="Max/Min">Max/Min</h2>
 <p>To find the maximum value of a BST (or any sub-tree of it), start with the root, and go all the way to the right until there is no more right child. Similar procedure for finding minimum value.</p>
-<h3 id="Successor/Predecessor">Successor/Predecessor</h3>
+<h2 id="Successor/Predecessor">Successor/Predecessor</h2>
 <p>To find the smallest node bigger than a given <code>node</code>, there are two cases:</p>
 <p>a. <code>node</code> has a right child: </p>
 <p>The successor is the minimum value of the sub-tree rooted at the right child, so call <code>min(node.right_child)</code> to find it.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">     node</div><div class="line">    /    \</div><div class="line">  <span class="keyword">...</span>   right</div><div class="line">       /     \</div><div class="line">     <span class="keyword">...</span>     <span class="keyword">...</span></div><div class="line">     /</div><div class="line">successor</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><pre><div class="line">     node</div><div class="line">    /    \</div><div class="line">  ...   right</div><div class="line">       /     \</div><div class="line">     ...     ...</div><div class="line">     /</div><div class="line">successor</div></pre></figure>
 
 <p>b. <code>node</code> has no right child:</p>
 <p>The succesor is the parent of <code>node</code> if it is a left child of the parent. Otherwise, to one-level up and check whether the parent is a left child of the grand-parent, etc. Go all the way up to the top until we get a node who is a left child of its parent, and that parent is the successor of <code>node</code>. If we reach the root of the tree, <code>node</code> does not have a successor and it is the maximum node of the BST.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">                           successor</div><div class="line">                           /</div><div class="line">grand-grand-<span class="keyword">...</span>-grand parent</div><div class="line">                           \</div><div class="line">                           <span class="keyword">...</span></div><div class="line">                             \</div><div class="line">                             node</div><div class="line">                            /    \</div><div class="line">                          <span class="keyword">...</span>    null</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><pre><div class="line">                   successor</div><div class="line">                   /</div><div class="line">grand-...-grand-parent</div><div class="line">                   \</div><div class="line">                   ...</div><div class="line">                     \</div><div class="line">                     node</div><div class="line">                    /    \</div><div class="line">                  ...    null</div></pre></figure>
 
 <p>Similar procedure for the predecessor.</p>
-<h3 id="Delete">Delete</h3>
+<h2 id="Delete">Delete</h2>
 <p>a. <code>node</code> has no child:</p>
 <p>Just set the link from <code>node</code>‘s parent to <code>node</code> as <code>null</code> and delete the node.</p>
 <p>b. <code>node</code> has one child:</p>
 <p>Let’s say <code>node</code> has a left child but no right child. All we need is to link the left sub-tree of <code>node</code> with its parent and delete <code>node</code>.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">     |----------&gt; parent</div><div class="line">     |            /</div><div class="line">link |         node (deleted)</div><div class="line">     |        /    \</div><div class="line">     |---&gt; left    null</div><div class="line">           /  \</div><div class="line">         <span class="keyword">...</span>  <span class="keyword">...</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><pre><div class="line">     |----------> parent</div><div class="line">     |            /</div><div class="line">link |         node (deleted)</div><div class="line">     |        /    \</div><div class="line">     |---> left    null</div><div class="line">           /  \</div><div class="line">         ...  ...</div></pre></figure>
 
 <p>c. <code>node</code> has two children but the right child of <code>node</code> does not have left child:</p>
 <p>Put the right child in the place of <code>node</code> and delete <code>node</code>. And “old right child” become the parent of the left child.</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">           parent</div><div class="line">           /</div><div class="line">        node (deleted) &lt;--|</div><div class="line">      /      \            | move to here</div><div class="line">  left       right -------|</div><div class="line">  /  \       /   \</div><div class="line"><span class="keyword">...</span>  <span class="keyword">...</span>  null   <span class="keyword">...</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><pre><div class="line">           parent</div><div class="line">           /</div><div class="line">        node (deleted) &lt;--|</div><div class="line">      /      \            | move to here</div><div class="line">  left       right -------|</div><div class="line">  /  \       /   \</div><div class="line"><span class="keyword">...</span>  <span class="keyword">...</span>  null   <span class="keyword">...</span></div></pre></figure>
 
 <p>Or, we can do the similar thing to the left child if the right child does has a left child.</p>
 <p>d. <code>node</code> has two children and non of the above is valid:</p>
@@ -131,13 +128,13 @@
 <li>Find the successor of <code>node</code>, put it in the place of <code>node</code> and delete <code>node</code>.</li>
 <li>Put the successor’s right child <code>B</code> (if exists) in the place of the successor, and so now <code>B</code> is the left child of the seccesor’s parent <code>A</code>.</li>
 </ol>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">            parent</div><div class="line">          /</div><div class="line">       node (deleted) &lt;---|</div><div class="line">     /      \             |</div><div class="line">  left      right         |</div><div class="line">  /  \      /   \         |</div><div class="line"><span class="keyword">...</span>  <span class="keyword">...</span>  <span class="keyword">...</span>   <span class="keyword">...</span>       | move to here</div><div class="line">          /               |</div><div class="line">         A                |</div><div class="line">        /                 |</div><div class="line">   successor -------------|    &lt;--|</div><div class="line">   /       \                      | move to here</div><div class="line"> null       B --------------------|</div><div class="line">           / \</div><div class="line">         <span class="keyword">...</span> <span class="keyword">...</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><pre><div class="line">            parent</div><div class="line">          /</div><div class="line">       node (deleted) &lt;---|</div><div class="line">     /      \             |</div><div class="line">  left      right         |</div><div class="line">  /  \      /   \         |</div><div class="line"><span class="keyword">...</span>  <span class="keyword">...</span>  <span class="keyword">...</span>   <span class="keyword">...</span>       | move to here</div><div class="line">          /               |</div><div class="line">         A                |</div><div class="line">        /                 |</div><div class="line">   successor -------------|    &lt;--|</div><div class="line">   /       \                      | move to here</div><div class="line"> null       B --------------------|</div><div class="line">           / \</div><div class="line">         <span class="keyword">...</span> <span class="keyword">...</span></div></pre></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://whk.me/binary-search-tree-basics/" data-id="p54x19jv3q26cuz9" class="article-share-link">Share</a>
+      <a data-url="http://whk.me/binary-search-tree-basics/" data-id="mlpyhd14tl6xxa0u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithms/">algorithms</a></li></ul>
@@ -147,6 +144,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/binary-tree-traversal/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Binary tree traversal
+        
+      </div>
+    </a>
   
   
     <a href="/heard-internship/" id="article-nav-older" class="article-nav-link-wrap">
@@ -169,7 +175,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithms/">algorithms</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recommendation-systems/">recommendation systems</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithms/">algorithms</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recommendation-systems/">recommendation systems</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -178,7 +184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -188,6 +194,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/binary-tree-traversal/">Binary tree traversal</a>
+          </li>
         
           <li>
             <a href="/binary-search-tree-basics/">Binary search tree basics</a>
